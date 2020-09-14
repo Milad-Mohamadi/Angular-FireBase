@@ -1,0 +1,159 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+// @import '~@angular/material/theming';
+@import 'material-theming';
+@include mat-core();
+
+// Custom blue grey
+$project-blue-grey: (
+  50: #eceff1,
+  100: #cfd8dc,
+  200: #b0bec5,
+  300: #90a4ae,
+  400: #78909c,
+  500: #607d8b,
+  600: #546e7a,
+  700: #455a64,
+  800: #37474f,
+  900: #031f43,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
+);
+
+// Foreground palette for light themes.
+$project-light-theme-foreground: (
+  base: #37474f,
+  divider: $dark-dividers,
+  dividers: $dark-dividers,
+  disabled: $dark-disabled-text,
+  disabled-button: rgba(#37474f, 0.26),
+  disabled-text: $dark-disabled-text,
+  elevation: black,
+  hint-text: $dark-disabled-text,
+  secondary-text: $dark-secondary-text,
+  icon: rgba(#37474f, 0.54),
+  icons: rgba(#37474f, 0.54),
+  text: rgba(#37474f, 0.87),
+  slider-min: rgba(#37474f, 0.87),
+  slider-off: rgba(#37474f, 0.26),
+  slider-off-active: rgba(#37474f, 0.38),
+);
+
+$foreground: $project-light-theme-foreground;
+$background: $mat-light-theme-background;
+
+@function project-light-theme(
+  $primary,
+  $accent,
+  $warn: mat-palette($mat-red)
+) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $foreground,
+    background: $background
+  );
+}
+
+$font-family-roboto: 'Roboto', 'Helvetica Neue', sans-serif;
+$font-family-iransans: 'IRANSans', 'Helvetica Neue', sans-serif;
+$font-family-cool: 'Kalam', 'Helvetica Neue', sans-serif;
+$font-family-base: $font-family-roboto;
+
+$font-weight-semi-bold: 500;
+
+$project-primary: mat-palette($mat-deep-purple, 900);
+$project-accent: mat-palette($mat-indigo, A900);
+$project-warn: mat-palette($mat-red, 700);
+
+$project-theme: project-light-theme(
+  $project-primary,
+  $project-accent,
+  $project-warn
+);
+
+$project-typography: mat-typography-config(
+  $font-family: $font-family-iransans,
+  $display-4: mat-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3: mat-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2: mat-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1: mat-typography-level(34px, 40px, 400),
+  $headline: mat-typography-level(24px, 32px, 400),
+  $title: mat-typography-level(20px, 32px, 500),
+  $subheading-2: mat-typography-level(16px, 28px, 400),
+  $subheading-1: mat-typography-level(15px, 24px, 400),
+  $body-2: mat-typography-level(14px, 24px, 500),
+  $body-1: mat-typography-level(14px, 20px, 400),
+  $caption: mat-typography-level(12px, 20px, 400),
+  $button: mat-typography-level(14px, 14px, 500),
+  $input: mat-typography-level(inherit, 1.125, 400),
+);
+
+@include angular-material-theme($project-theme);
+
+@include angular-material-typography($project-typography);
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+);
+
+$link-color: currentColor;
+$link-hover-color: currentColor;
+$link-hover-decoration: none;
+
+$label-margin-bottom: 0;
+
+$path-to-images: '/assets/images';
+$path-to-fonts: '/assets/fonts';
+
+$body-bg: white;
+$dashboard-body-bg: mat-color(mat-palette($mat-gray, 200));
+
+$btn-border-radius: 5px;
+$btn-line-height: 40px;
+
+$landing-header-gap: 120px;
+$landing-toggle-icon-size: 40px;
+
+$blue: mat-color($project-primary);
+$red: mat-color($project-warn);
+$green: mat-color(mat-palette($mat-green, A700));
+$gray-600: #adb5bd !default;
+
+$enable-gradients: true;
+
+$sidenav-bg: white;
+$sidenav-width: 260px;
+
+$avatar-size: 50px;

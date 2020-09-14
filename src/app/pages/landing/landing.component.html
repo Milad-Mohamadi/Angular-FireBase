@@ -1,0 +1,24 @@
+<div class="landing-wrapper" fxLayout="column" fxLayoutAlign="center center">
+  <div class="container" fxLayout="column" fxLayoutAlign="center center">
+    <h1 class="mat-display-2 font-weight-bold text-center text-light">
+      Make Your Dictionary
+    </h1>
+    <button
+      *ngIf="!isLoggedIn"
+      mat-stroked-button
+      color="primary"
+      [routerLink]="['user/login']"
+    >
+      Login
+    </button>
+
+    <button
+      *ngIf="isLoggedIn"
+      mat-stroked-button
+      color="primary"
+      [routerLink]="['dashboard/dictionary']"
+    >
+      My Dictionary
+    </button>
+  </div>
+</div>

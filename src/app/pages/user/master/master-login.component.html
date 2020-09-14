@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-lg-8 background"></div>
+    <div
+      class="col-md-6 col-lg-4 main-column"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+    >
+      <div class="top-button-container p-2">
+        <button mat-button routerLink="/">
+          <mat-icon class="flip">arrow_back</mat-icon>
+          Back to home
+        </button>
+      </div>
+
+      <div class="w-100 p-5">
+        <div *ngIf="!(afAuth.authState | async)">
+          <h2 class="text-center mb-4 px-0 px-md-4 mat-h2">
+            Login to make your custom dictionary and manage it.
+          </h2>
+          <div class="my-5">
+            <button mat-raised-button appGoogleSignin class="m-2">
+              <img src="/assets/google-logo.svg" /> Login with Google
+            </button>
+            <button mat-raised-button appGitHubSignin class="m-2">
+              <img src="/assets/github-logo.png" /> Login with GitHub
+            </button>
+            <button mat-raised-button appFacebookSignin class="m-2">
+              <img src="/assets/facebook-logo.png" /> Login with Facebook
+            </button>
+          </div>
+          <app-email-login></app-email-login>
+        </div>
+        <div
+          *ngIf="afAuth.authState | async as user"
+          class="logout my-3 text-center"
+        >
+          <p>
+            Logged in as
+          </p>
+          <p mat-h3>{{ user.email }}</p>
+          <button
+            mat-flat-button
+            color="warn"
+            class="my-3 w-50"
+            (click)="afAuth.signOut()"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/utilities";
+
+// General
+@import "fonts";
+@import "utilities";
+@import "general";
+
+// libs
+@import "libs/landing";
+@import "libs/login";
+@import "libs/header";
+@import "libs/dictionary";

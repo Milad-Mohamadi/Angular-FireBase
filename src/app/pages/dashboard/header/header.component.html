@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div
+      class="mat-headline greeting mb-0"
+      fxLayout="row"
+      fxFlex="1 1"
+      fxLayoutAlign="start center"
+    >
+      <div class="d-none d-sm-inline mx-2">
+        {{ date | greeting }},
+        <strong class="text-capitalize name pointer-cursor">
+          {{ user?.displayName }}
+        </strong>
+      </div>
+    </div>
+
+    <div
+      mat-card-avatar
+      *ngIf="user?.photoURL"
+      class="mx-1 user-avatar shadow-sm pointer-cursor"
+      [style.backgroundImage]="user?.photoURL | safeBgUrl"
+      [routerLink]="['/user/login']"
+    ></div>
+  </mat-toolbar-row>
+</mat-toolbar>
+

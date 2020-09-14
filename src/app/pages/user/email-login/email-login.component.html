@@ -1,0 +1,126 @@
+<div *ngIf="isSignup">
+  <h3>Create Account</h3>
+</div>
+
+<div *ngIf="isLogin">
+  <h3>Sign In</h3>
+</div>
+
+<div *ngIf="isPasswordReset">
+  <h3>Reset Password</h3>
+</div>
+<form
+  [formGroup]="form"
+  fxLayout="column"
+  class="mx-0 mx-lg-4"
+  (ngSubmit)="submit()"
+>
+  <mat-form-field [color]="email.valid && 'accent'" appearance="standard">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" />
+    <mat-error *ngIf="email.invalid && email.dirty">
+      You must enter a valid email address
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field
+    [color]="email.valid && 'accent'"
+    *ngIf="!isPasswordReset"
+    appearance="standard"
+  >
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      formControlName="password"
+      [type]="hide ? 'password' : 'text'"
+      autocomplete="off"
+    />
+    <button
+      type="button"
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+
+    <mat-error *ngIf="password.invalid && password.dirty">
+      Password must be at least 6 characters long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field
+    [color]="passwordDoesMatch ? 'accent' : 'warn'"
+    *ngIf="isSignup"
+    appearance="standard"
+  >
+    <mat-label>Confirm password</mat-label>
+    <input
+      matInput
+      formControlName="passwordConfirm"
+      type="password"
+      autocomplete="off"
+    />
+    <mat-error *ngIf="passwordConfirm.dirty && !passwordDoesMatch">
+      Password does not match
+    </mat-error>
+  </mat-form-field>
+
+  <mat-error class="server-error">{{ serverMessage }}</mat-error>
+
+  <button
+    *ngIf="isPasswordReset"
+    mat-flat-button
+    color="primary"
+    class="my-3"
+    type="submit"
+    [disabled]="loading"
+  >
+    Send Reset Email
+  </button>
+
+  <button
+    *ngIf="!isPasswordReset"
+    mat-flat-button
+    color="primary"
+    class="my-3"
+    type="submit"
+    [disabled]="loading"
+  >
+    Submit
+  </button>
+</form>
+
+<div
+  fxLayout="row"
+  fxLayoutAlign="space-around center"
+  fxLayout.xs="column"
+  fxLayoutAlign.xs="center center"
+  class="my-3"
+>
+  <button
+    mat-button
+    *ngIf="isLogin && !isPasswordReset"
+    (click)="changeType('reset')"
+    class="my-2"
+  >
+    Forgot password?
+  </button>
+  <button *ngIf="isSignup" mat-button (click)="changeType('login')">
+    Do you have an account?
+  </button>
+  <button
+    *ngIf="isLogin"
+    size="small"
+    mat-button
+    (click)="changeType('signup')"
+  >
+    Don't have an account?
+  </button>
+
+  <div *ngIf="isPasswordReset">
+    <button size="small" mat-button (click)="changeType('login')">Back</button>
+  </div>
+</div>

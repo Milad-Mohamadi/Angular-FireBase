@@ -1,0 +1,135 @@
+<div>
+  <div class="container">
+    <h1 class="mat-display-1 font-weight-bold my-5 text-center">
+      My Dictionary
+    </h1>
+    <form
+      #formDirective="ngForm"
+      [formGroup]="form"
+      class="m-5"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayout.xs="column"
+      fxLayoutAlign.xs="center center"
+      (ngSubmit)="create(formDirective, $event)"
+    >
+      <mat-form-field class="example-full-width m-2">
+        <mat-label>Text</mat-label>
+        <input matInput formControlName="text" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width m-2">
+        <mat-label>Mean</mat-label>
+        <input matInput formControlName="mean" />
+      </mat-form-field>
+      <button type="submit" mat-icon-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </form>
+
+    <!-- List -->
+    <mat-card>
+      <mat-card-content>
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="text">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+              TEXT
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              {{ row?.text }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="mean">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+              MEAN
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              {{ row?.mean }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+              ACTIONS
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button
+                mat-button
+                color="primary"
+                (click)="openUpdateDialog($event, row, updateDialog)"
+              >
+                Edit
+              </button>
+              <button
+                mat-button
+                color="warn"
+                (click)="openDeletionDialog($event, row, deletionDialog)"
+              >
+                Delete
+              </button>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Deletion dialog -->
+  <ng-template #deletionDialog>
+    <div class="pb-2">
+      <h1 mat-dialog-title>Delete text</h1>
+      <div class="mb-3">
+        Do you want to delete
+        <span class="font-weight-semi-bold"> {{ selectedRow.text }} </span>?
+      </div>
+      <div mat-dialog-actions fxLayoutAlign="end">
+        <button mat-stroked-button (click)="closeDialog()" class="mx-1">
+          No
+        </button>
+        <button mat-stroked-button color="warn" (click)="delete(selectedRow)">
+          Yes
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <!--Update dialog -->
+  <ng-template #updateDialog>
+    <div class="px-1 pt-3 pb-0">
+      <h3 class="text-center mat-h2">
+        Edit your text
+      </h3>
+      <form
+        [formGroup]="updateForm"
+        fxLayout="column"
+        (ngSubmit)="update(updateForm)"
+      >
+        <mat-form-field appearance="standard">
+          <mat-label>text</mat-label>
+          <input matInput formControlName="text" autocomplete="off" />
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Mean</mat-label>
+          <input matInput formControlName="mean" autocomplete="off" />
+        </mat-form-field>
+        <button
+          type="submit"
+          mat-flat-button
+          color="primary"
+          class="w-100 my-3"
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          mat-flat-button
+          class="w-100"
+          (click)="closeDialog()"
+        >
+          Close
+        </button>
+      </form>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,16 @@
+{
+  "hosting": [
+    {
+      "site": "my-dictionary-2020",
+      "target": "save-and-learn-vocabulary",
+      "public": "dist/save-and-learn-vocabulary",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

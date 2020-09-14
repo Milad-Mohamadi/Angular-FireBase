@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "save-and-learn-vocabulary": {
+      "hosting": {
+        "save-and-learn-vocabulary": [
+          "save-and-learn-vocabulary"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "my-dictionary-2020": "save-and-learn-vocabulary"
+  }
+}

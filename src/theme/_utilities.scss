@@ -1,0 +1,83 @@
+.font-weight-semi-bold {
+  font-weight: $font-weight-semi-bold;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
+
+.blockquote {
+  margin-bottom: $spacer;
+
+  .blockquote-footer {
+    display: block;
+    color: $blockquote-small-color;
+
+    &::before {
+      content: '\2014\00A0'; // em dash, nbsp
+    }
+  }
+}
+
+// New responsive alignment
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .text#{$infix}-start {
+      text-align: start !important;
+    }
+    .text#{$infix}-end {
+      text-align: end !important;
+    }
+  }
+}
+
+// New gradient variant
+@mixin bg-gradient-variant($parent, $color) {
+  #{$parent} {
+    background: linear-gradient(
+      180deg,
+      $color,
+      mix($body-bg, $color, 35%)
+    ) !important;
+  }
+}
+
+@if $enable-gradients {
+  @each $color, $value in $theme-colors {
+    @include bg-gradient-variant('.bg-gradient-#{$color}', $value);
+  }
+}
+
+@mixin shadow-big-color($color) {
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba($color, 0.4);
+}
+
+@mixin shadow-big() {
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.2 * 4),
+    0 4px 25px 0px rgba(0, 0, 0, 0.2), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.overflow-auto {
+  overflow: auto;
+}

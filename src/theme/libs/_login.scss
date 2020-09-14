@@ -1,0 +1,35 @@
+app-master-login {
+  .container-fluid {
+    text-align: center;
+    > .row {
+      min-height: 100vh;
+    }
+  }
+
+  .background {
+    background-image: url(#{$path-to-images}/bg-2.jpg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center;
+    color: $body-bg;
+
+    @include media-breakpoint-up(md) {
+      min-height: 100vh;
+    }
+  }
+
+  .main-column {
+    position: relative;
+
+    .top-button-container {
+      width: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
